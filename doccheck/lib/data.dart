@@ -86,6 +86,11 @@ class UserData {
     return difference.inDays;
   }
 
+  static final Map<Gender, DoctorType> ignoreDoctorTypes = {
+    Gender.male: DoctorType.gynecologist,
+    Gender.female: DoctorType.urologist,
+  };
+
   void loadFromFile() {}
   void saveToFile() {
     print(toJson().toString());

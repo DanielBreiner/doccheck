@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'DoctorInfo.dart';
+import 'doctorinfo.dart';
 import '../data.dart';
 
 class HomePage extends StatefulWidget {
@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(fontSize: 20),
                 ),
                 FlatButton(
-                    child: Text(Doctor.All[doctorIndex].name,
+                    child: Text(Doctor.all[DoctorType.values[doctorIndex]].name,
                         style: TextStyle(fontFamily: 'Arial', fontSize: 50)),
                     padding: EdgeInsets.all(0.0),
                     textColor: Colors.black,
@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                DoctorInfo(Doctor.All[doctorIndex])),
+                                DoctorInfo(Doctor.all[doctorIndex])),
                       );
                     })
               ],

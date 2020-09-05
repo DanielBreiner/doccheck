@@ -3,21 +3,28 @@ import 'doctorinfo.dart';
 import '../data.dart';
 
 class DoctorListWidget extends StatelessWidget {
+  final DoctorType ignore;
+
+  DoctorListWidget(this.ignore);
+
   @override
   Widget build(BuildContext context) {
     return _buildDoctorList(context);
   }
 
   Widget _buildDoctorList(BuildContext context) => ListView.separated(
-      itemCount: Doctor.All.length,
+      itemCount: Doctor.all.length,
       padding: const EdgeInsets.all(20),
       separatorBuilder: (BuildContext context, int index) {
+        if (DoctorType.values[index] == ignore) return SizedBox();
         return SizedBox(
           height: 15,
         );
       },
       itemBuilder: (BuildContext context, int index) {
-        return DoctorTileWidget(Doctor.All[index]);
+        DoctorType type = DoctorType.values[index];
+        if (type == ignore) return SizedBox();
+        return DoctorTileWidget(Doctor.all[DoctorType.values[index]]);
       });
 }
 
@@ -43,7 +50,7 @@ class DoctorTileWidget extends StatelessWidget {
                 children: [
                   Text(
                     doctor.name,
-                    style: TextStyle(fontSize: 32),
+                    style: TextStyle(fontSize: 24),
                   ),
                   Container(
                       child: Text(
