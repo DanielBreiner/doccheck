@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import '../data.dart';
 
-class AboutDoctor extends StatelessWidget {
+class DoctorInfo extends StatelessWidget {
   final Doctor doctor;
-  AboutDoctor(this.doctor);
+  DoctorInfo(this.doctor);
 
   @override
   Widget build(BuildContext context) {

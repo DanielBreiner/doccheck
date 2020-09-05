@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'DoctorInfo.dart';
+import '../data.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -9,7 +11,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int asd = 0;
+  int doctorIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,13 +34,20 @@ class _HomePageState extends State<HomePage> {
                   'Upcoming visits',
                   style: TextStyle(fontSize: 20),
                 ),
-                /*FlatButton(
-                      child: Text(Doctor.All[0].name,
-                          style: TextStyle(fontFamily: 'Arial', fontSize: 50)),
-                      padding: EdgeInsets.all(0.0),
-                      textColor: Colors.black,
-                      disabledTextColor: Colors.black,
-                    )*/
+                FlatButton(
+                    child: Text(Doctor.All[doctorIndex].name,
+                        style: TextStyle(fontFamily: 'Arial', fontSize: 50)),
+                    padding: EdgeInsets.all(0.0),
+                    textColor: Colors.black,
+                    disabledTextColor: Colors.black,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                DoctorInfo(Doctor.All[doctorIndex])),
+                      );
+                    })
               ],
             ),
           ),
