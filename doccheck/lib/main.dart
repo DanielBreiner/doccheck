@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'data.dart';
-import 'homepage.dart';
-=======
->>>>>>> origin/master
+import 'pages/homepage.dart';
 
 void main() {
   runApp(MyApp());
@@ -72,7 +69,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
       appBar: AppBar(
         title: widgetOptions[selectedIndex],
         backgroundColor: Colors.red,
@@ -113,13 +109,4 @@ class AboutDoctor extends StatelessWidget {
       ),
     );
   }
-=======
-        appBar: AppBar(
-          // Here we take the value from the MyHomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
-          title: Text(widget.title),
-        ),
-        body: Text("Hello World!"));
-  }
->>>>>>> origin/master
 }
