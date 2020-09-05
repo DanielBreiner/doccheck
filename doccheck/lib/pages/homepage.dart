@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'DoctorInfo.dart';
+import 'doctorinfo.dart';
 import '../data.dart';
 
 class HomePage extends StatefulWidget {
