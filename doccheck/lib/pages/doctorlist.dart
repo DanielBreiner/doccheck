@@ -3,9 +3,8 @@ import 'doctorinfo.dart';
 import '../data.dart';
 
 class DoctorListWidget extends StatelessWidget {
-  final DoctorType ignore;
-
-  DoctorListWidget(this.ignore);
+  DoctorListWidget(this.userData);
+  final UserData userData;
 
   @override
   Widget build(BuildContext context) {
@@ -16,21 +15,24 @@ class DoctorListWidget extends StatelessWidget {
       itemCount: Doctor.all.length,
       padding: const EdgeInsets.all(20),
       separatorBuilder: (BuildContext context, int index) {
-        if (DoctorType.values[index] == ignore) return SizedBox();
+        if (DoctorType.values[index] ==
+            UserData.ignoreDoctorTypes[userData.gender]) return SizedBox();
         return SizedBox(
           height: 15,
         );
       },
       itemBuilder: (BuildContext context, int index) {
         DoctorType type = DoctorType.values[index];
-        if (type == ignore) return SizedBox();
-        return DoctorTileWidget(Doctor.all[DoctorType.values[index]]);
+        if (type == UserData.ignoreDoctorTypes[userData.gender])
+          return SizedBox();
+        return DoctorTileWidget(Doctor.all[DoctorType.values[index]], userData);
       });
 }
 
 class DoctorTileWidget extends StatelessWidget {
+  DoctorTileWidget(this.doctor, this.userData);
   final Doctor doctor;
-  DoctorTileWidget(this.doctor);
+  final UserData userData;
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +68,8 @@ class DoctorTileWidget extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => DoctorInfo(doctor)),
+            MaterialPageRoute(
+                builder: (context) => DoctorInfo(doctor, userData)),
           );
         });
   }

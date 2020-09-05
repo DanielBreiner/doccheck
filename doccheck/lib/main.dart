@@ -62,8 +62,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     List<Widget> pages = <Widget>[
-      HomePage(),
-      DoctorListWidget(UserData.ignoreDoctorTypes[userData.gender]),
+      HomePage(userData),
+      DoctorListWidget(userData),
       Settings(userData)
     ];
     return Scaffold(

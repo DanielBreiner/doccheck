@@ -3,8 +3,9 @@ import 'doctorinfo.dart';
 import '../data.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
+  HomePage(this.userData, {Key key, this.title}) : super(key: key);
   final String title;
+  final UserData userData;
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -42,8 +43,8 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                DoctorInfo(Doctor.all[doctorIndex])),
+                            builder: (context) => DoctorInfo(
+                                Doctor.all[doctorIndex], widget.userData)),
                       );
                     })
               ],
