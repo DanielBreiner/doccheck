@@ -12,22 +12,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-        // This makes the visual density adapt to the platform that you run
-        // the app on. For desktop platforms, the controls will be smaller and
-        // closer together (more dense) than on mobile platforms.
+        primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Doctor gang'),
+      home: MyHomePage(title: 'Home page'),
     );
   }
 }
@@ -51,6 +39,43 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const List<Widget> _widgetOptions = <Widget>[
+    Text(
+      'Home',
+      style: optionStyle,
+    ),
+    Text(
+      'Business',
+      style: optionStyle,
+    ),
+    Text(
+      'School',
+      style: optionStyle,
+    ),
+  ];
+  static const List<Widget> _widgetDoctors = <Widget>[
+    Text(
+      'GP',
+      style: optionStyle,
+    ),
+    Text(
+      'Eye doc',
+      style: optionStyle,
+    ),
+    Text(
+      'Morgue',
+      style: optionStyle,
+    ),
+  ];
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -60,12 +85,70 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-        appBar: AppBar(
-          // Here we take the value from the MyHomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
-          title: Text(widget.title),
+      appBar: AppBar(
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
+        title: _widgetOptions[_selectedIndex],
+        backgroundColor: Colors.red,
+      ),
+      body: Center(
+        // Center is a layout widget. It takes a single child and positions it
+        // in the middle of the parent.
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              width: MediaQuery.of(context).size.width * 0.95,
+              height: 180,
+              margin: const EdgeInsets.all(10.0),
+              padding: EdgeInsets.all(20),
+              color: Colors.blue[300],
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Upcoming visits',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  FlatButton(
+                    child: Text('Your lovely doctor',
+                        style: TextStyle(fontFamily: 'Arial', fontSize: 50)),
+                    padding: EdgeInsets.all(0.0),
+                    textColor: Colors.black,
+                    disabledTextColor: Colors.black,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AboutDoctor()),
+                      );
+                    },
+                  )
+                ],
+              ),
+            ),
+          ],
         ),
-        body: _buildDoctorList());
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text('Home'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.business),
+            title: Text('Doctors'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.local_bar),
+            title: Text('Am I dead?'),
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
+      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
   }
 
   Widget _buildDoctorList() => ListView.separated(
@@ -102,4 +185,18 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ]),
       );
+}
+
+class AboutDoctor extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Your lovely doctor"),
+      ),
+      body: Center(
+        child: Text('hello'),
+      ),
+    );
+  }
 }
