@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'data.dart';
+import '../data.dart';
 
 class AboutDoctor extends StatelessWidget {
   final Doctor doctor;
