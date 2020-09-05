@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'DocCheck',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'DocCheck'),
     );
   }
 }
@@ -49,8 +49,11 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+enum Gender { female, male, other }
+
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  Gender _gender;
 
   void _incrementCounter() {
     setState(() {
@@ -63,46 +66,115 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  DateTime _birthDate = DateTime.now();
+  TextEditingController _textEditingController = TextEditingController();
+
+  Future<void> _showDatePicker() async {
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: _birthDate,
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+      initialEntryMode: DatePickerEntryMode.input,
+    );
+    if (picked != null) {
+      setState(() {
+        _birthDate = picked;
+        _textEditingController
+          ..text =
+              "${_birthDate.day.toString()}.${_birthDate.month.toString()}.${_birthDate.year.toString()}"
+          ..selection = TextSelection.fromPosition(TextPosition(
+              offset: _textEditingController.text.length,
+              affinity: TextAffinity.upstream));
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+      body: Container(
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "Your gender",
+                    textAlign: TextAlign.left,
+                    textDirection: TextDirection.ltr,
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  Container(),
+                  RadioListTile<Gender>(
+                    title: const Text('Female'),
+                    value: Gender.female,
+                    groupValue: _gender,
+                    onChanged: (Gender value) {
+                      setState(() {
+                        _gender = value;
+                      });
+                    },
+                  ),
+                  RadioListTile<Gender>(
+                    title: const Text('Male'),
+                    value: Gender.male,
+                    groupValue: _gender,
+                    onChanged: (Gender value) {
+                      setState(() {
+                        _gender = value;
+                      });
+                    },
+                  ),
+                  RadioListTile<Gender>(
+                    title: const Text('Other'),
+                    value: Gender.other,
+                    groupValue: _gender,
+                    onChanged: (Gender value) {
+                      setState(() {
+                        _gender = value;
+                      });
+                    },
+                  ),
+                ],
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            // Text(
+            //   _gender == Gender.male ? "Male" : "Female",
+            //   textDirection: TextDirection.ltr,
+            // ),
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "Your date of birth",
+                    textAlign: TextAlign.left,
+                    textDirection: TextDirection.ltr,
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  TextField(
+                    focusNode: AlwaysDisabledFocusNode(),
+                    controller: _textEditingController,
+                    onTap: () {
+                      _showDatePicker();
+                    },
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -111,7 +183,12 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
+}
+
+class AlwaysDisabledFocusNode extends FocusNode {
+  @override
+  bool get hasFocus => false;
 }
