@@ -23,7 +23,6 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           Container(
             width: MediaQuery.of(context).size.width * 0.95,
-            height: 180,
             margin: const EdgeInsets.all(10.0),
             padding: EdgeInsets.all(20),
             color: Colors.blue[300],
