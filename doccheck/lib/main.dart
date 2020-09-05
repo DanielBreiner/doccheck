@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'data.dart';
+import 'aboutDoctor.dart';
 
 void main() {
   runApp(MyApp());
@@ -119,7 +120,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => AboutDoctor()),
+                        MaterialPageRoute(
+                            builder: (context) => AboutDoctor(Doctor.All[0])),
                       );
                     },
                   )
@@ -185,18 +187,4 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ]),
       );
-}
-
-class AboutDoctor extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Your lovely doctor"),
-      ),
-      body: Center(
-        child: Text('hello'),
-      ),
-    );
-  }
 }
