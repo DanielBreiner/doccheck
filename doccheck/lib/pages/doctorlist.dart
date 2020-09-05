@@ -50,7 +50,7 @@ class DoctorTileWidget extends StatelessWidget {
                 children: [
                   Text(
                     doctor.name,
-                    style: TextStyle(fontSize: 32),
+                    style: TextStyle(fontSize: 24),
                   ),
                   Container(
                       child: Text(
