@@ -14,8 +14,7 @@ class _HomePageState extends State<HomePage> {
   int doctorIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Center(
+    return Center(
       // Center is a layout widget. It takes a single child and positions it
       // in the middle of the parent.
       child: Column(
@@ -53,6 +52,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-    ));
+    );
   }
 }

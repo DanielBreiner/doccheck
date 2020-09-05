@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'data.dart';
-import 'pages/DoctorInfo.dart';
 import 'pages/homepage.dart';
+import 'pages/DoctorList.dart';
 
 void main() {
   runApp(MyApp());
@@ -60,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
       style: optionStyle,
     ),
   ];
-  List<Widget> pages = <Widget>[HomePage(), HomePage(), HomePage()];
+  List<Widget> pages = <Widget>[HomePage(), DoctorListWidget(), HomePage()];
   void _onItemTapped(int index) {
     setState(() {
       selectedIndex = index;
