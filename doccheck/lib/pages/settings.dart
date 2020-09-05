@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'data.dart';
+import '../data.dart';
 
 class Settings extends StatefulWidget {
   Settings(this.userData, {Key key, this.title}) : super(key: key);

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'data.dart';
 import 'pages/homepage.dart';
+import 'pages/settings.dart';
 
 void main() {
   runApp(MyApp());
@@ -42,6 +43,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int doctorIndex = 0;
   int selectedIndex = 0;
+  UserData userData = UserData();
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> widgetOptions = <Widget>[
@@ -59,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
       style: optionStyle,
     ),
   ];
-  List<Widget> pages = <Widget>[HomePage(), HomePage(), HomePage()];
+
   void _onItemTapped(int index) {
     setState(() {
       selectedIndex = index;
@@ -68,6 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> pages = <Widget>[HomePage(), HomePage(), Settings(userData)];
     return Scaffold(
       appBar: AppBar(
         title: widgetOptions[selectedIndex],
