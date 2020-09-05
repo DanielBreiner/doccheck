@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'data.dart';
 import 'aboutDoctor.dart';
+import 'pages/homepage.dart';
 
 void main() {
   runApp(MyApp());
@@ -40,97 +41,40 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _selectedIndex = 0;
+  int doctorIndex = 0;
+  int selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
+  static const List<Widget> widgetOptions = <Widget>[
+    // set titles of main pages
     Text(
       'Home',
       style: optionStyle,
     ),
     Text(
-      'Business',
+      'Doctors',
       style: optionStyle,
     ),
     Text(
-      'School',
+      'Settings',
       style: optionStyle,
     ),
   ];
-  static const List<Widget> _widgetDoctors = <Widget>[
-    Text(
-      'GP',
-      style: optionStyle,
-    ),
-    Text(
-      'Eye doc',
-      style: optionStyle,
-    ),
-    Text(
-      'Morgue',
-      style: optionStyle,
-    ),
-  ];
+  List<Widget> pages = <Widget>[HomePage(), HomePage(), HomePage()];
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+      selectedIndex = index;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: _widgetOptions[_selectedIndex],
+        title: widgetOptions[selectedIndex],
         backgroundColor: Colors.red,
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              width: MediaQuery.of(context).size.width * 0.95,
-              height: 180,
-              margin: const EdgeInsets.all(10.0),
-              padding: EdgeInsets.all(20),
-              color: Colors.blue[300],
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    'Upcoming visits',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  FlatButton(
-                    child: Text('Your lovely doctor',
-                        style: TextStyle(fontFamily: 'Arial', fontSize: 50)),
-                    padding: EdgeInsets.all(0.0),
-                    textColor: Colors.black,
-                    disabledTextColor: Colors.black,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => AboutDoctor(Doctor.All[0])),
-                      );
-                    },
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+      body: pages[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -139,52 +83,17 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.business),
-            title: Text('Doctors'),
+            title: Text('Business'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.local_bar),
-            title: Text('Am I dead?'),
+            icon: Icon(Icons.school),
+            title: Text('School'),
           ),
         ],
-        currentIndex: _selectedIndex,
+        currentIndex: selectedIndex,
         selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
-
-  Widget _buildDoctorList() => ListView.separated(
-      itemCount: Doctor.All.length,
-      padding: const EdgeInsets.all(20),
-      separatorBuilder: (BuildContext context, int index) {
-        return SizedBox(
-          height: 15,
-        );
-      },
-      itemBuilder: (BuildContext context, int index) {
-        return _buildDoctorTile(Doctor.All[index]);
-      });
-
-  Widget _buildDoctorTile(Doctor doctor) => Container(
-        height: 150,
-        color: Colors.amber[600],
-        child: Row(children: [
-          Container(
-            child: Icon(Icons.pregnant_woman, size: (32)),
-            padding: EdgeInsets.symmetric(horizontal: 30),
-          ),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(doctor.name, style: TextStyle(fontSize: 32)),
-              FlatButton(
-                onPressed: () {},
-                child: Text(
-                  "Viac info" + doctor.toNextAppointment(UserData()).toString(),
-                ),
-              ),
-            ],
-          )
-        ]),
-      );
 }
