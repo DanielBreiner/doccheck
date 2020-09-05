@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import '../data.dart';
 
 class Settings extends StatefulWidget {
-  Settings(this.userData, {Key key, this.title}) : super(key: key);
+  Settings(this.userData, {Key key}) : super(key: key);
 
   UserData userData;
-  final String title;
 
   @override
   _SettingsState createState() => _SettingsState();
@@ -38,9 +37,6 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         child: Column(
