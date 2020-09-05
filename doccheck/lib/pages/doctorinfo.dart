@@ -44,7 +44,7 @@ class _DoctorInfoState extends State<DoctorInfo> {
           Container(
               margin: EdgeInsets.symmetric(horizontal: 30, vertical: 60),
               child: Text(
-                  widget.doctor.toNextAppointment(UserData()).toString() +
+                  widget.userData.toNextAppointment(widget.doctor).toString() +
                       " Days to next appointment")),
           Container(
               margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),

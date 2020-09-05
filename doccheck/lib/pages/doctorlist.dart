@@ -15,17 +15,17 @@ class DoctorListWidget extends StatelessWidget {
       itemCount: Doctor.all.length,
       padding: const EdgeInsets.all(20),
       separatorBuilder: (BuildContext context, int index) {
-        if (DoctorType.values[index] ==
-            UserData.ignoreDoctorTypes[userData.gender]) return SizedBox();
+        // if (DoctorType.values[index] ==
+        //     UserData.ignoreDoctorTypes[userData.gender]) return SizedBox();
         return SizedBox(
           height: 15,
         );
       },
       itemBuilder: (BuildContext context, int index) {
-        DoctorType type = DoctorType.values[index];
-        if (type == UserData.ignoreDoctorTypes[userData.gender])
-          return SizedBox();
-        return DoctorTileWidget(Doctor.all[DoctorType.values[index]], userData);
+        // DoctorType type = DoctorType.values[index];
+        // if (type == UserData.ignoreDoctorTypes[userData.gender])
+        // return SizedBox();
+        return DoctorTileWidget(Doctor.all[index], userData);
       });
 }
 
@@ -57,7 +57,7 @@ class DoctorTileWidget extends StatelessWidget {
                   Container(
                       child: Text(
                     "Viac info " +
-                        doctor.toNextAppointment(UserData()).toString(),
+                        userData.toNextAppointment(doctor).toString(),
                   )),
                 ],
               )

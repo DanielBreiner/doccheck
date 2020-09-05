@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(fontSize: 20),
                 ),
                 FlatButton(
-                    child: Text(Doctor.all[DoctorType.values[doctorIndex]].name,
+                    child: Text(Doctor.all[doctorIndex].name,
                         style: TextStyle(fontFamily: 'Arial', fontSize: 50)),
                     padding: EdgeInsets.all(0.0),
                     textColor: Colors.black,
