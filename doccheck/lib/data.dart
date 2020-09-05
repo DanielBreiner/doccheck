@@ -1,3 +1,7 @@
+import 'package:json_annotation/json_annotation.dart';
+
+enum DoctorType { gp, gynecologist, urologist, gastro, dentist }
+
 class Doctor {
   final String name;
   final String description;
@@ -5,42 +9,59 @@ class Doctor {
 
   Doctor(this.name, this.description, this.toNextAppointment);
 
-  static final List<Doctor> All = [
-    Doctor("Všeobecný lekár",
+  static final Map<DoctorType, Doctor> All = {
+    DoctorType.gp: Doctor("Všeobecný lekár",
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         (data) {
       return 0;
     }),
-    Doctor("Gynekológ",
+    DoctorType.gynecologist: Doctor("Gynekológ",
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         (data) {
       return 0;
     }),
-    Doctor("Urológ",
+    DoctorType.urologist: Doctor("Urológ",
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         (data) {
       return 0;
     }),
-    Doctor("Gastroenterológ",
+    DoctorType.gastro: Doctor("Gastroenterológ",
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         (data) {
       return 0;
     }),
-    Doctor("Zubný lekár",
+    DoctorType.dentist: Doctor("Zubný lekár",
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         (data) {
       return 0;
     }),
-  ];
+  };
 }
 
 enum Gender { male, female, other }
 
+@JsonSerializable()
 class UserData {
   DateTime birthDate = DateTime.now();
   Gender gender = Gender.other;
-  Map<Doctor, DateTime> nextAppointments;
+  Map<DoctorType, DateTime> nextAppointments;
 
-  void LoadFromFile() {}
-  void SaveToFile() {}
+  UserData();
+
+  void loadFromFile() {}
+  void saveToFile() {
+    print(toJson().toString());
+  }
+
+  factory UserData.fromJson(Map<String, dynamic> json) {
+    return UserData();
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "birthDate": birthDate.toUtc(),
+      "gender": gender.toString(),
+      "nextAppointments": nextAppointments.toString()
+    };
+  }
 }
