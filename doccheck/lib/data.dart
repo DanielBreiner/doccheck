@@ -39,7 +39,7 @@ enum Gender { male, female, other }
 class UserData {
   DateTime birthDate = DateTime.now();
   Gender gender = Gender.other;
-  Map<Doctor, DateTime> lastAppointments;
+  Map<Doctor, DateTime> nextAppointments;
 
   void LoadFromFile() {}
   void SaveToFile() {}
