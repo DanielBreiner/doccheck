@@ -4,7 +4,7 @@ import '../data.dart';
 class Settings extends StatefulWidget {
   Settings(this.userData, {Key key}) : super(key: key);
 
-  UserData userData;
+  final UserData userData;
 
   @override
   _SettingsState createState() => _SettingsState();
