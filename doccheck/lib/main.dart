@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'pages/homepage.dart';
-import 'pages/DoctorList.dart';
+import 'pages/doctorlist.dart';
 import 'pages/settings.dart';
 import 'data.dart';
 
