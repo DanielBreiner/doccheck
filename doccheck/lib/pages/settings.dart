@@ -48,7 +48,7 @@ class _SettingsState extends State<Settings> {
             RaisedButton(
               onPressed: () {},
               textColor: Colors.white,
-              color: Colors.blue,
+              color: Colors.red,
               padding: const EdgeInsets.all(0.0),
               child: Container(
                 padding: const EdgeInsets.all(10.0),
