@@ -3,7 +3,7 @@ import 'doctorinfo.dart';
 import '../data.dart';
 
 class DoctorListWidget extends StatelessWidget {
-  DoctorType ignore;
+  final DoctorType ignore;
 
   DoctorListWidget(this.ignore);
 
