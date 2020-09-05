@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'data.dart';
+import 'pages/DoctorInfo.dart';
 import 'pages/homepage.dart';
 
 void main() {
@@ -92,20 +93,6 @@ class _MyHomePageState extends State<MyHomePage> {
         currentIndex: selectedIndex,
         selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
-      ),
-    );
-  }
-}
-
-class AboutDoctor extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Your lovely doctor"),
-      ),
-      body: Center(
-        child: Text('hello'),
       ),
     );
   }
