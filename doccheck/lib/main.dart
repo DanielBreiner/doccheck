@@ -72,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     List<Widget> pages = <Widget>[
       HomePage(),
-      DoctorListWidget(),
+      DoctorListWidget(UserData.ignoreDoctorTypes[userData.gender]),
       Settings(userData)
     ];
     return Scaffold(
