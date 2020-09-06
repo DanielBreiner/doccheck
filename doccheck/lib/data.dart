@@ -56,7 +56,7 @@ class DoctorUrologist extends Doctor {
   }
 
   Duration betweenAppointments(UserData data) {
-    return Duration(days: ((365 * 3) / 2).round());
+    return Duration(days: 365 * 3);
   }
 }
 
@@ -70,7 +70,7 @@ class DoctorGastro extends Doctor {
   }
 
   Duration betweenAppointments(UserData data) {
-    return Duration(days: 365 * 5);
+    return Duration(days: 365 * 10);
   }
 }
 
@@ -84,7 +84,7 @@ class DoctorDentist extends Doctor {
   }
 
   Duration betweenAppointments(UserData data) {
-    return Duration(days: 180);
+    return Duration(days: 365);
   }
 }
 
