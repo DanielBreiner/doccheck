@@ -42,8 +42,6 @@ class _SettingsState extends State<Settings> {
     _tempBirth ??= widget.userData.birthDate;
     _textEditingController.text =
         "${_tempBirth.day.toString()}.${_tempBirth.month.toString()}.${_tempBirth.year.toString()}";
-    print(widget.userData.gender);
-    print(_tempGender);
     return Scaffold(
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),

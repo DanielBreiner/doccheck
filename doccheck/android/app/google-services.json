@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "20572266662",
+    "firebase_url": "https://healtheasy-3eea8.firebaseio.com",
+    "project_id": "healtheasy-3eea8",
+    "storage_bucket": "healtheasy-3eea8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:20572266662:android:2f48520e61ab9cc5505467",
+        "android_client_info": {
+          "package_name": "com.example.doccheck"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "20572266662-akhfb459udga1t8s11ahp8slrif16qdj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMLVfCEHytht3ZY1ucSEBqnpksLJLLJ5k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "20572266662-akhfb459udga1t8s11ahp8slrif16qdj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
