@@ -1,4 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'dart:io';
+import 'dart:async';
+import 'package:path_provider/path_provider.dart';
 
 abstract class Doctor {
   final String name;
@@ -106,6 +109,7 @@ class UserData {
           () => DateTime.now().add(doctor.betweenAppointments(this) * 0.5),
         );
     }
+    saveToFile();
   }
 
   UserData() {
@@ -117,9 +121,18 @@ class UserData {
     return difference.inDays;
   }
 
-  void loadFromFile() {}
-  void saveToFile() {
-    print(toJson().toString());
+  // factory UserData.loadFromFile() {
+  //   getApplicationDocumentsDirectory().then((dir) => {
+  //     File('${dir.path}/save.json').readAsStringSync();
+  //     jsonDecode();
+  //     return UserData.fromJson(json);
+  //   });
+  // }
+
+  void saveToFile() async {
+    Directory dir = await getApplicationDocumentsDirectory();
+    File('${dir.path}/save.json').writeAsString(toJson().toString());
+    print("Saved to " + dir.path);
   }
 
   factory UserData.fromJson(Map<String, dynamic> json) {
@@ -127,10 +140,13 @@ class UserData {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      "birthDate": birthDate.toUtc(),
+    Map<String, String> json = {
+      "birthDate": birthDate.millisecondsSinceEpoch.toString(),
       "gender": gender.toString(),
-      "nextAppointments": nextAppointments.toString()
     };
+    for (Doctor doctor in Doctor.all)
+      json[doctor.name] =
+          nextAppointments[doctor]?.millisecondsSinceEpoch.toString();
+    return json;
   }
 }
