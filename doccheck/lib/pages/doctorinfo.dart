@@ -12,20 +12,21 @@ class DoctorInfo extends StatefulWidget {
 
 class _DoctorInfoState extends State<DoctorInfo> {
   TextEditingController _textEditingController = TextEditingController();
+  DateTime _tempDate = null;
 
   Future<void> _showDatePicker() async {
     final picked = await showDatePicker(
       context: context,
-      initialDate: widget.userData.birthDate,
+      initialDate: DateTime.now(),
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),
     );
     if (picked != null) {
       setState(() {
-        widget.userData.birthDate = picked;
+        _tempDate = picked;
         _textEditingController
           ..text =
-              "${widget.userData.birthDate.day.toString()}.${widget.userData.birthDate.month.toString()}.${widget.userData.birthDate.year.toString()}"
+              "${_tempDate.day.toString()}.${_tempDate.month.toString()}.${_tempDate.year.toString()}"
           ..selection = TextSelection.fromPosition(TextPosition(
               offset: _textEditingController.text.length,
               affinity: TextAffinity.upstream));
@@ -35,8 +36,11 @@ class _DoctorInfoState extends State<DoctorInfo> {
 
   @override
   Widget build(BuildContext context) {
+    _tempDate ??= widget.userData.nextAppointments[widget.doctor]
+        .subtract(widget.doctor.betweenAppointments(widget.userData));
+    print(_tempDate);
     _textEditingController.text =
-        "${widget.userData.birthDate.day.toString()}.${widget.userData.birthDate.month.toString()}.${widget.userData.birthDate.year.toString()}";
+        "${_tempDate.day.toString()}.${_tempDate.month.toString()}.${_tempDate.year.toString()}";
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.doctor.name),
@@ -59,7 +63,13 @@ class _DoctorInfoState extends State<DoctorInfo> {
               children: <Widget>[
                 _lastAppointmentWidget(),
                 RaisedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      widget.userData.nextAppointments[widget.doctor] =
+                          _tempDate.add(widget.doctor
+                              .betweenAppointments(widget.userData));
+                    });
+                  },
                   textColor: Colors.white,
                   color: Colors.red,
                   padding: const EdgeInsets.all(0.0),
