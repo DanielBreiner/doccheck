@@ -53,18 +53,24 @@ class _SettingsState extends State<Settings> {
           children: <Widget>[
             _genderPicker(),
             _dateOfBirthWidget(),
-            RaisedButton(
-              onPressed: () {
-                setState(() {
-                  widget.userData.setData(_tempBirth, _tempGender);
-                });
-              },
-              textColor: Colors.white,
-              color: Colors.red,
-              padding: const EdgeInsets.all(0.0),
-              child: Container(
-                padding: const EdgeInsets.all(10.0),
-                child: const Text('Save', style: TextStyle(fontSize: 20)),
+            Builder(
+              builder: (context) => RaisedButton(
+                onPressed: () {
+                  setState(() {
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text('Your settings were saved'),
+                      duration: Duration(seconds: 3),
+                    ));
+                    widget.userData.setData(_tempBirth, _tempGender);
+                  });
+                },
+                textColor: Colors.white,
+                color: Colors.red,
+                padding: const EdgeInsets.all(0.0),
+                child: Container(
+                  padding: const EdgeInsets.all(10.0),
+                  child: const Text('Save', style: TextStyle(fontSize: 20)),
+                ),
               ),
             ),
           ],

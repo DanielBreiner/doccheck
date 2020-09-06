@@ -38,7 +38,6 @@ class _DoctorInfoState extends State<DoctorInfo> {
   Widget build(BuildContext context) {
     _tempDate ??= widget.userData.nextAppointments[widget.doctor]
         .subtract(widget.doctor.betweenAppointments(widget.userData));
-    print(_tempDate);
     _textEditingController.text =
         "${_tempDate.day.toString()}.${_tempDate.month.toString()}.${_tempDate.year.toString()}";
     return Scaffold(
@@ -62,20 +61,26 @@ class _DoctorInfoState extends State<DoctorInfo> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 _lastAppointmentWidget(),
-                RaisedButton(
-                  onPressed: () {
-                    setState(() {
-                      widget.userData.nextAppointments[widget.doctor] =
-                          _tempDate.add(widget.doctor
-                              .betweenAppointments(widget.userData));
-                    });
-                  },
-                  textColor: Colors.white,
-                  color: Colors.red,
-                  padding: const EdgeInsets.all(0.0),
-                  child: Container(
-                    padding: const EdgeInsets.all(10.0),
-                    child: const Text('Save', style: TextStyle(fontSize: 16)),
+                Builder(
+                  builder: (context) => RaisedButton(
+                    onPressed: () {
+                      setState(() {
+                        Scaffold.of(context).showSnackBar(SnackBar(
+                          content: Text('Your last appointment was saved'),
+                          duration: Duration(seconds: 3),
+                        ));
+                        widget.userData.nextAppointments[widget.doctor] =
+                            _tempDate.add(widget.doctor
+                                .betweenAppointments(widget.userData));
+                      });
+                    },
+                    textColor: Colors.white,
+                    color: Colors.red,
+                    padding: const EdgeInsets.all(0.0),
+                    child: Container(
+                      padding: const EdgeInsets.all(10.0),
+                      child: const Text('Save', style: TextStyle(fontSize: 16)),
+                    ),
                   ),
                 ),
               ],
