@@ -89,6 +89,12 @@ class _SettingsState extends State<Settings> {
               textDirection: TextDirection.ltr,
               style: TextStyle(fontSize: 20),
             ),
+            Text(
+              "(used only for showing Gynecologist/Urologist)",
+              textAlign: TextAlign.left,
+              textDirection: TextDirection.ltr,
+              style: TextStyle(fontSize: 12),
+            ),
             Container(),
             RadioListTile<Gender>(
               title: const Text('Female'),
