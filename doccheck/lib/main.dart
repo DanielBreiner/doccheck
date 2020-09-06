@@ -3,6 +3,7 @@ import 'pages/homepage.dart';
 import 'pages/doctorlist.dart';
 import 'pages/settings.dart';
 import 'data.dart';
+import 'push_notifications.dart';
 
 void main() {
   runApp(MyApp());
@@ -36,6 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int doctorIndex = 0;
   int selectedIndex = 0;
   UserData userData = UserData();
+
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> widgetOptions = <Widget>[
