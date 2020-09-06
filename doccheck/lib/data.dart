@@ -20,7 +20,7 @@ abstract class Doctor {
 class DoctorGp extends Doctor {
   DoctorGp()
       : super("General Practitioner",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
+            "You are entitled to a preventive examination by a general practitioner once every two years. Registered donors of blood, organs or tissues should complete it every year. The preventive examination should last 30 minutes. The doctor will start the examination with an interview focusing on the risks arising from the family history, workload and lifestyle, and check the vaccination status (eg tetanus).");
 
   bool ignore(UserData data) {
     return false;
@@ -34,7 +34,7 @@ class DoctorGp extends Doctor {
 class DoctorGynecologist extends Doctor {
   DoctorGynecologist()
       : super("Gynecologist",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
+            "The first preventive examination in a gynecological outpatient clinic awaits women after the age of eighteen. They then go to the doctor for a regular examination every year. During the examination, the doctor thoroughly examines the patient's medical history, provides her with expert advice on contraception, hormone replacement therapy, prevention of sexually transmitted diseases and instructions on the increased risk of gynecological malignancies with a positive family history and the presence of other risk factors in women.");
 
   bool ignore(UserData data) {
     return data.gender == Gender.male;
@@ -48,7 +48,7 @@ class DoctorGynecologist extends Doctor {
 class DoctorUrologist extends Doctor {
   DoctorUrologist()
       : super("Urologist",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
+            "The preventive examination at the urologist concerns only men. It focuses on the search for oncological diseases of the male genitals and prostate.During the preventive examination, blood is collected for laboratory examination of prostate specific antigen and creatinine, and urine and urinary sediment are chemically examined. The examination is performed on men from the age of 50 or on men from the age of 40 if they have a prostate cancer disease in their first-degree kinship.");
 
   bool ignore(UserData data) {
     return DateTime.now().year - data.birthDate.year < 50 ||
@@ -63,7 +63,7 @@ class DoctorUrologist extends Doctor {
 class DoctorGastro extends Doctor {
   DoctorGastro()
       : super("Gastroentrerererer",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
+            "Preventive examination in a gastroenterological outpatient clinic is extremely important. It is an examination of the rectum and colon with a colonoscope, which can detect pre-cancerous stages of colorectal cancer and save your life. The examination is aimed at finding polyps and early stages of colorectal cancer. During a colonoscopy examination for a tumor or polyp, a tissue sample is taken from its surface and sent for histological examination and, if possible, the polyp is endoscopically removed.");
 
   bool ignore(UserData data) {
     return false;
@@ -77,7 +77,7 @@ class DoctorGastro extends Doctor {
 class DoctorDentist extends Doctor {
   DoctorDentist()
       : super("Dent",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
+            "An adult is entitled to a preventive check-up at the dentist once a year. Pregnant women should undergo the examination twice during the same pregnancy, at the beginning of the first and at the beginning of the third trimester. Do not postpone a preventive visit to the dental clinic. Dental caries treatment is fully reimbursed from public health insurance only if the insured person was on a preventive check-up at the dentist in the previous calendar year.");
 
   bool ignore(UserData data) {
     return false;
