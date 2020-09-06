@@ -37,7 +37,7 @@ class DoctorGynecologist extends Doctor {
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
 
   bool ignore(UserData data) {
-    return false;
+    return data.gender == Gender.male;
   }
 
   Duration betweenAppointments(UserData data) {
@@ -51,7 +51,8 @@ class DoctorUrologist extends Doctor {
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
 
   bool ignore(UserData data) {
-    return DateTime.now().year - data.birthDate.year < 50;
+    return DateTime.now().year - data.birthDate.year < 50 ||
+        data.gender == Gender.female;
   }
 
   Duration betweenAppointments(UserData data) {
@@ -93,17 +94,20 @@ enum Gender { male, female, other }
 class UserData {
   DateTime birthDate;
   Gender gender;
-  Map<Doctor, DateTime> nextAppointments;
+  Map<Doctor, DateTime> nextAppointments = {};
 
-  UserData() {
-    birthDate = DateTime.now();
-    gender = Gender.other;
-    nextAppointments = {};
+  void setData(DateTime birthDate, Gender gender) {
     for (Doctor doctor in Doctor.all) {
       if (!doctor.ignore(this))
-        nextAppointments[doctor] =
-            DateTime.now().add(doctor.betweenAppointments(this) * 0.5);
+        nextAppointments.putIfAbsent(
+          doctor,
+          () => DateTime.now().add(doctor.betweenAppointments(this) * 0.5),
+        );
     }
+  }
+
+  UserData() {
+    setData(DateTime.now(), Gender.other);
   }
 
   int toNextAppointment(Doctor doctor) {
