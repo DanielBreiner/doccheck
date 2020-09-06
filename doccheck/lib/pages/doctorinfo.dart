@@ -19,7 +19,6 @@ class _DoctorInfoState extends State<DoctorInfo> {
       initialDate: widget.userData.birthDate,
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),
-      initialEntryMode: DatePickerEntryMode.input,
     );
     if (picked != null) {
       setState(() {
@@ -37,24 +36,46 @@ class _DoctorInfoState extends State<DoctorInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.doctor.name),
-        ),
-        body: Column(children: [
+      appBar: AppBar(
+        title: Text(widget.doctor.name),
+      ),
+      body: Container(
+        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+        child: Column(children: <Widget>[
           Container(
-              margin: EdgeInsets.symmetric(horizontal: 30, vertical: 60),
+              margin: EdgeInsets.symmetric(vertical: 40),
               child: Text(
                   widget.userData.toNextAppointment(widget.doctor).toString() +
                       " Days to next appointment")),
           Container(
-              margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              margin: EdgeInsets.symmetric(vertical: 10),
               child: Text(widget.doctor.description)),
-          Container(child: _lastAppointmentWidget())
-        ]));
+          Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                _lastAppointmentWidget(),
+                RaisedButton(
+                  onPressed: () {},
+                  textColor: Colors.white,
+                  color: Colors.red,
+                  padding: const EdgeInsets.all(0.0),
+                  child: Container(
+                    padding: const EdgeInsets.all(10.0),
+                    child: const Text('Save', style: TextStyle(fontSize: 16)),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ]),
+      ),
+    );
   }
 
   Widget _lastAppointmentWidget() => Container(
-        padding: EdgeInsets.only(top: 20, bottom: 20),
+        padding: EdgeInsets.only(top: 20, bottom: 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,26 +102,3 @@ class AlwaysDisabledFocusNode extends FocusNode {
   @override
   bool get hasFocus => false;
 }
-
-// class DoctorInfo extends StatelessWidget {
-//   final Doctor doctor;
-//   DoctorInfo(this.doctor);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//         appBar: AppBar(
-//           title: Text(doctor.name),
-//         ),
-//         body: Column(children: [
-//           Container(
-//               margin: EdgeInsets.symmetric(horizontal: 30, vertical: 60),
-//               child: Text(doctor.toNextAppointment(UserData()).toString() +
-//                   " Days to next appointment")),
-//           Container(
-//               margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-//               child: Text(doctor.description)),
-//           Container()
-//         ]));
-//   }
-// }
