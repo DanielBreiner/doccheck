@@ -12,21 +12,23 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
   TextEditingController _textEditingController = TextEditingController();
+  DateTime _tempBirth = null;
+  Gender _tempGender = null;
 
   Future<void> _showDatePicker() async {
     final picked = await showDatePicker(
       context: context,
-      initialDate: widget.userData.birthDate,
+      initialDate: _tempBirth,
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),
       initialEntryMode: DatePickerEntryMode.input,
     );
     if (picked != null) {
       setState(() {
-        widget.userData.birthDate = picked;
+        _tempBirth = picked;
         _textEditingController
           ..text =
-              "${widget.userData.birthDate.day.toString()}.${widget.userData.birthDate.month.toString()}.${widget.userData.birthDate.year.toString()}"
+              "${_tempBirth.day.toString()}.${_tempBirth.month.toString()}.${_tempBirth.year.toString()}"
           ..selection = TextSelection.fromPosition(TextPosition(
               offset: _textEditingController.text.length,
               affinity: TextAffinity.upstream));
@@ -36,6 +38,12 @@ class _SettingsState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
+    _tempGender ??= widget.userData.gender;
+    _tempBirth ??= widget.userData.birthDate;
+    _textEditingController.text =
+        "${_tempBirth.day.toString()}.${_tempBirth.month.toString()}.${_tempBirth.year.toString()}";
+    print(widget.userData.gender);
+    print(_tempGender);
     return Scaffold(
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -46,7 +54,11 @@ class _SettingsState extends State<Settings> {
             _genderPicker(),
             _dateOfBirthWidget(),
             RaisedButton(
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  widget.userData.setData(_tempBirth, _tempGender);
+                });
+              },
               textColor: Colors.white,
               color: Colors.red,
               padding: const EdgeInsets.all(0.0),
@@ -77,30 +89,30 @@ class _SettingsState extends State<Settings> {
             RadioListTile<Gender>(
               title: const Text('Female'),
               value: Gender.female,
-              groupValue: widget.userData.gender,
+              groupValue: _tempGender,
               onChanged: (Gender value) {
                 setState(() {
-                  widget.userData.gender = value;
+                  _tempGender = value;
                 });
               },
             ),
             RadioListTile<Gender>(
               title: const Text('Male'),
               value: Gender.male,
-              groupValue: widget.userData.gender,
+              groupValue: _tempGender,
               onChanged: (Gender value) {
                 setState(() {
-                  widget.userData.gender = value;
+                  _tempGender = value;
                 });
               },
             ),
             RadioListTile<Gender>(
               title: const Text('Other'),
               value: Gender.other,
-              groupValue: widget.userData.gender,
+              groupValue: _tempGender,
               onChanged: (Gender value) {
                 setState(() {
-                  widget.userData.gender = value;
+                  _tempGender = value;
                 });
               },
             ),

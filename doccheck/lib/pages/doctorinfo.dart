@@ -35,6 +35,8 @@ class _DoctorInfoState extends State<DoctorInfo> {
 
   @override
   Widget build(BuildContext context) {
+    _textEditingController.text =
+        "${widget.userData.birthDate.day.toString()}.${widget.userData.birthDate.month.toString()}.${widget.userData.birthDate.year.toString()}";
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.doctor.name),
