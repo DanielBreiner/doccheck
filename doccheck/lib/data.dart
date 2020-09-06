@@ -97,6 +97,8 @@ class UserData {
   Map<Doctor, DateTime> nextAppointments = {};
 
   void setData(DateTime birthDate, Gender gender) {
+    this.birthDate = birthDate;
+    this.gender = gender;
     for (Doctor doctor in Doctor.all) {
       if (!doctor.ignore(this))
         nextAppointments.putIfAbsent(
