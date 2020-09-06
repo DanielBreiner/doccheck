@@ -58,6 +58,7 @@ class _SettingsState extends State<Settings> {
                     Scaffold.of(context).showSnackBar(SnackBar(
                       content: Text('Your settings were saved'),
                       duration: Duration(seconds: 3),
+                      backgroundColor: Colors.red,
                     ));
                     widget.userData.setData(_tempBirth, _tempGender);
                   });
@@ -67,7 +68,7 @@ class _SettingsState extends State<Settings> {
                 padding: const EdgeInsets.all(0.0),
                 child: Container(
                   padding: const EdgeInsets.all(10.0),
-                  child: const Text('Save', style: TextStyle(fontSize: 20)),
+                  child: const Text('Save', style: TextStyle(fontSize: 18)),
                 ),
               ),
             ),
@@ -88,6 +89,12 @@ class _SettingsState extends State<Settings> {
               textAlign: TextAlign.left,
               textDirection: TextDirection.ltr,
               style: TextStyle(fontSize: 20),
+            ),
+            Text(
+              "(used only for showing Gynecologist/Urologist)",
+              textAlign: TextAlign.left,
+              textDirection: TextDirection.ltr,
+              style: TextStyle(fontSize: 12),
             ),
             Container(),
             RadioListTile<Gender>(

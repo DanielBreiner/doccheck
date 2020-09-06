@@ -36,12 +36,16 @@ class DoctorTileWidget extends StatelessWidget {
     return FlatButton(
         child: Container(
           height: 150,
-          color: Colors.amber[600],
+          color: Colors.blue[400],
           child: Row(
             children: [
               Container(
-                child: Icon(Icons.pregnant_woman, size: (32)),
-                padding: EdgeInsets.symmetric(horizontal: 30),
+                child: Icon(
+                  Icons.person,
+                  size: (40),
+                  color: Colors.white,
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 20),
               ),
               Column(
                 mainAxisSize: MainAxisSize.min,
@@ -49,13 +53,24 @@ class DoctorTileWidget extends StatelessWidget {
                 children: [
                   Text(
                     doctor.name,
-                    style: TextStyle(fontSize: 24),
+                    style: TextStyle(fontSize: 24, color: Colors.white),
                   ),
                   Container(
                       child: Text(
-                    "Viac info " +
+                    "Days till next appointment: " +
                         userData.toNextAppointment(doctor).toString(),
+                    style: TextStyle(color: Colors.white),
                   )),
+                  Container(
+                      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+                      margin: EdgeInsets.only(top: 8),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                      ),
+                      child: Text(
+                        "Details",
+                        style: TextStyle(color: Colors.blue[400]),
+                      )),
                 ],
               )
             ],

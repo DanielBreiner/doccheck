@@ -50,11 +50,20 @@ class _DoctorInfoState extends State<DoctorInfo> {
           Container(
               margin: EdgeInsets.symmetric(vertical: 40),
               child: Text(
-                  widget.userData.toNextAppointment(widget.doctor).toString() +
-                      " Days to next appointment")),
+                  "Days till next appointment: " +
+                      widget.userData
+                          .toNextAppointment(widget.doctor)
+                          .toString(),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))),
           Container(
               margin: EdgeInsets.symmetric(vertical: 10),
-              child: Text(widget.doctor.description)),
+              child: Text(
+                widget.doctor.description,
+                textAlign: TextAlign.justify,
+                style: TextStyle(
+                  fontSize: 15,
+                ),
+              )),
           Container(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -68,6 +77,7 @@ class _DoctorInfoState extends State<DoctorInfo> {
                         Scaffold.of(context).showSnackBar(SnackBar(
                           content: Text('Your last appointment was saved'),
                           duration: Duration(seconds: 3),
+                          backgroundColor: Colors.red,
                         ));
                         widget.userData.nextAppointments[widget.doctor] =
                             _tempDate.add(widget.doctor
@@ -79,7 +89,7 @@ class _DoctorInfoState extends State<DoctorInfo> {
                     padding: const EdgeInsets.all(0.0),
                     child: Container(
                       padding: const EdgeInsets.all(10.0),
-                      child: const Text('Save', style: TextStyle(fontSize: 16)),
+                      child: const Text('Save', style: TextStyle(fontSize: 18)),
                     ),
                   ),
                 ),
@@ -92,7 +102,7 @@ class _DoctorInfoState extends State<DoctorInfo> {
   }
 
   Widget _lastAppointmentWidget() => Container(
-        padding: EdgeInsets.only(top: 20, bottom: 10),
+        padding: EdgeInsets.only(top: 20, bottom: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
