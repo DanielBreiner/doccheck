@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key key, this.title}) : super(key: key) {}
 
   final String title;
 
@@ -37,6 +37,10 @@ class _MyHomePageState extends State<MyHomePage> {
   int doctorIndex = 0;
   int selectedIndex = 0;
   UserData userData = UserData();
+
+  _MyHomePageState() {
+    PushNotificationsManager().init(_showItemDialog);
+  }
 
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -93,6 +97,27 @@ class _MyHomePageState extends State<MyHomePage> {
         selectedItemColor: Colors.red,
         onTap: _onItemTapped,
       ),
+    );
+  }
+
+  void _showItemDialog(Map<String, dynamic> message) {
+    showDialog<bool>(
+        context: context,
+        builder: (_) => _buildDialog(context, message["notification"]));
+  }
+
+  Widget _buildDialog(BuildContext context, Map<String, String> message) {
+    return AlertDialog(
+      title: Text(message["title"]),
+      content: Text(message["body"]),
+      actions: <Widget>[
+        FlatButton(
+          child: const Text('OK'),
+          onPressed: () {
+            Navigator.pop(context, true);
+          },
+        ),
+      ],
     );
   }
 }
