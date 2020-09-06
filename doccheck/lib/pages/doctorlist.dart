@@ -36,7 +36,7 @@ class DoctorTileWidget extends StatelessWidget {
     return FlatButton(
         child: Container(
           height: 150,
-          color: Colors.blue[300],
+          color: Colors.blue[400],
           child: Row(
             children: [
               Container(
@@ -69,7 +69,7 @@ class DoctorTileWidget extends StatelessWidget {
                       ),
                       child: Text(
                         "Details",
-                        style: TextStyle(color: Colors.blue[300]),
+                        style: TextStyle(color: Colors.blue[400]),
                       )),
                 ],
               )

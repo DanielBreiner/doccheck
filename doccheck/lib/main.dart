@@ -75,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: widgetOptions[selectedIndex],
-        backgroundColor: Colors.blue[300],
+        backgroundColor: Colors.blue[400],
       ),
       body: pages[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
