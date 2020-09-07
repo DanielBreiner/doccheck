@@ -61,7 +61,6 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
   void _onItemTapped(int index) {
     setState(() {
-      userData.saveToFile();
       selectedIndex = index;
     });
   }
@@ -107,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (_) => _buildDialog(context, message["notification"]));
   }
 
-  Widget _buildDialog(BuildContext context, Map<String, String> message) {
+  Widget _buildDialog(BuildContext context, Map<dynamic, dynamic> message) {
     return AlertDialog(
       title: Text(message["title"]),
       content: Text(message["body"]),

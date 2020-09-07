@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'doctorinfo.dart';
 import 'doctorlist.dart';
 import '../data.dart';
 

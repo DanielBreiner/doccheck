@@ -12,7 +12,7 @@ class DoctorInfo extends StatefulWidget {
 
 class _DoctorInfoState extends State<DoctorInfo> {
   TextEditingController _textEditingController = TextEditingController();
-  DateTime _tempDate = null;
+  DateTime _tempDate;
 
   Future<void> _showDatePicker() async {
     final picked = await showDatePicker(
@@ -46,57 +46,62 @@ class _DoctorInfoState extends State<DoctorInfo> {
       ),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-        child: Column(children: <Widget>[
-          Container(
-              margin: EdgeInsets.symmetric(vertical: 40),
-              child: Text(
-                  "Days till next appointment: " +
-                      widget.userData
-                          .toNextAppointment(widget.doctor)
-                          .toString(),
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))),
-          Container(
-              margin: EdgeInsets.symmetric(vertical: 10),
-              child: Text(
-                widget.doctor.description,
-                textAlign: TextAlign.justify,
-                style: TextStyle(
-                  fontSize: 15,
-                ),
-              )),
-          Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                _lastAppointmentWidget(),
-                Builder(
-                  builder: (context) => RaisedButton(
-                    onPressed: () {
-                      setState(() {
-                        Scaffold.of(context).showSnackBar(SnackBar(
-                          content: Text('Your last appointment was saved'),
-                          duration: Duration(seconds: 3),
-                          backgroundColor: Colors.red,
-                        ));
-                        widget.userData.nextAppointments[widget.doctor] =
-                            _tempDate.add(widget.doctor
-                                .betweenAppointments(widget.userData));
-                      });
-                    },
-                    textColor: Colors.white,
-                    color: Colors.red,
-                    padding: const EdgeInsets.all(0.0),
-                    child: Container(
-                      padding: const EdgeInsets.all(10.0),
-                      child: const Text('Save', style: TextStyle(fontSize: 18)),
+        child: ListView(
+          shrinkWrap: true,
+          children: <Widget>[
+            Container(
+                margin: EdgeInsets.symmetric(vertical: 40),
+                child: Text(
+                    "Days till next appointment: " +
+                        widget.userData
+                            .toNextAppointment(widget.doctor)
+                            .toString(),
+                    style:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold))),
+            Container(
+                margin: EdgeInsets.symmetric(vertical: 10),
+                child: Text(
+                  widget.doctor.description,
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(
+                    fontSize: 15,
+                  ),
+                )),
+            Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  _lastAppointmentWidget(),
+                  Builder(
+                    builder: (context) => RaisedButton(
+                      onPressed: () {
+                        setState(() {
+                          Scaffold.of(context).showSnackBar(SnackBar(
+                            content: Text('Your last appointment was saved'),
+                            duration: Duration(seconds: 3),
+                            backgroundColor: Colors.red,
+                          ));
+                          widget.userData.nextAppointments[widget.doctor] =
+                              _tempDate.add(widget.doctor
+                                  .betweenAppointments(widget.userData));
+                        });
+                      },
+                      textColor: Colors.white,
+                      color: Colors.red,
+                      padding: const EdgeInsets.all(0.0),
+                      child: Container(
+                        padding: const EdgeInsets.all(10.0),
+                        child:
+                            const Text('Save', style: TextStyle(fontSize: 18)),
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          )
-        ]),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

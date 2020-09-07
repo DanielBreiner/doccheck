@@ -12,8 +12,8 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
   TextEditingController _textEditingController = TextEditingController();
-  DateTime _tempBirth = null;
-  Gender _tempGender = null;
+  DateTime _tempBirth;
+  Gender _tempGender;
 
   Future<void> _showDatePicker() async {
     final picked = await showDatePicker(
@@ -45,9 +45,8 @@ class _SettingsState extends State<Settings> {
     return Scaffold(
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
+          shrinkWrap: true,
           children: <Widget>[
             _genderPicker(),
             _dateOfBirthWidget(),

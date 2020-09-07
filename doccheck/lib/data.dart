@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'dart:io';
-import 'dart:async';
 import 'package:path_provider/path_provider.dart';
 
 abstract class Doctor {
