@@ -64,7 +64,7 @@ class DoctorUrologist extends Doctor {
 
 class DoctorGastro extends Doctor {
   DoctorGastro()
-      : super("Gastroentrerererer",
+      : super("Gastroenterologist",
             "Preventive examination in a gastroenterological outpatient clinic is extremely important. It is an examination of the rectum and colon with a colonoscope, which can detect pre-cancerous stages of colorectal cancer and save your life. The examination is aimed at finding polyps and early stages of colorectal cancer. During a colonoscopy examination for a tumor or polyp, a tissue sample is taken from its surface and sent for histological examination and, if possible, the polyp is endoscopically removed.");
 
   bool ignore(UserData data) {
@@ -78,7 +78,7 @@ class DoctorGastro extends Doctor {
 
 class DoctorDentist extends Doctor {
   DoctorDentist()
-      : super("Dent",
+      : super("Dentist",
             "An adult is entitled to a preventive check-up at the dentist once a year. Pregnant women should undergo the examination twice during the same pregnancy, at the beginning of the first and at the beginning of the third trimester. Do not postpone a preventive visit to the dental clinic. Dental caries treatment is fully reimbursed from public health insurance only if the insured person was on a preventive check-up at the dentist in the previous calendar year.");
 
   bool ignore(UserData data) {
