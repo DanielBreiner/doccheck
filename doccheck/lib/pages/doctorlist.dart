@@ -33,10 +33,10 @@ class DoctorTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
+    return RaisedButton(
         child: Container(
           height: 150,
-          color: Colors.blue[400],
+          color: Colors.blue[600],
           child: Row(
             children: [
               Container(
@@ -53,13 +53,18 @@ class DoctorTileWidget extends StatelessWidget {
                 children: [
                   Text(
                     doctor.name,
-                    style: TextStyle(fontSize: 24, color: Colors.white),
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.white,
+                    ),
                   ),
                   Container(
                       child: Text(
                     "Days till next appointment: " +
                         userData.toNextAppointment(doctor).toString(),
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
                   )),
                   Container(
                       padding: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
@@ -69,7 +74,9 @@ class DoctorTileWidget extends StatelessWidget {
                       ),
                       child: Text(
                         "Details",
-                        style: TextStyle(color: Colors.blue[400]),
+                        style: TextStyle(
+                          color: Colors.blue[600],
+                        ),
                       )),
                 ],
               )

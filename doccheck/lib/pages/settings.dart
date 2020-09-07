@@ -57,13 +57,13 @@ class _SettingsState extends State<Settings> {
                     Scaffold.of(context).showSnackBar(SnackBar(
                       content: Text('Your settings were saved'),
                       duration: Duration(seconds: 3),
-                      backgroundColor: Colors.red,
+                      backgroundColor: Colors.red[800],
                     ));
                     widget.userData.setData(_tempBirth, _tempGender);
                   });
                 },
                 textColor: Colors.white,
-                color: Colors.red,
+                color: Colors.red[700],
                 padding: const EdgeInsets.all(0.0),
                 child: Container(
                   padding: const EdgeInsets.all(10.0),

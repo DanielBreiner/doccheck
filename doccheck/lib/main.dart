@@ -3,20 +3,23 @@ import 'pages/homepage.dart';
 import 'pages/doctorlist.dart';
 import 'pages/settings.dart';
 import 'data.dart';
-import 'push_notifications.dart';
+import 'notifications.dart';
 
-void main() {
+NotificationSystem notifications = NotificationSystem();
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  notifications.initialize();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'HealthEasy',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Colors.red[800],
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MyHomePage(title: 'Home page'),
@@ -37,10 +40,6 @@ class _MyHomePageState extends State<MyHomePage> {
   int doctorIndex = 0;
   int selectedIndex = 0;
   UserData userData = UserData();
-
-  _MyHomePageState() {
-    PushNotificationsManager().init(_showItemDialog);
-  }
 
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -75,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: widgetOptions[selectedIndex],
-        backgroundColor: Colors.blue[400],
+        backgroundColor: Colors.red[800],
       ),
       body: pages[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -94,30 +93,30 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
         currentIndex: selectedIndex,
-        selectedItemColor: Colors.red,
+        selectedItemColor: Colors.red[800],
         onTap: _onItemTapped,
       ),
     );
   }
 
-  void _showItemDialog(Map<String, dynamic> message) {
-    showDialog<bool>(
-        context: context,
-        builder: (_) => _buildDialog(context, message["notification"]));
-  }
+  // void _showItemDialog(Map<String, dynamic> message) {
+  //   showDialog<bool>(
+  //       context: context,
+  //       builder: (_) => _buildDialog(context, message["notification"]));
+  // }
 
-  Widget _buildDialog(BuildContext context, Map<dynamic, dynamic> message) {
-    return AlertDialog(
-      title: Text(message["title"]),
-      content: Text(message["body"]),
-      actions: <Widget>[
-        FlatButton(
-          child: const Text('OK'),
-          onPressed: () {
-            Navigator.pop(context, true);
-          },
-        ),
-      ],
-    );
-  }
+  // Widget _buildDialog(BuildContext context, Map<dynamic, dynamic> message) {
+  //   return AlertDialog(
+  //     title: Text(message["title"]),
+  //     content: Text(message["body"]),
+  //     actions: <Widget>[
+  //       FlatButton(
+  //         child: const Text('OK'),
+  //         onPressed: () {
+  //           Navigator.pop(context, true);
+  //         },
+  //       ),
+  //     ],
+  //   );
+  // }
 }

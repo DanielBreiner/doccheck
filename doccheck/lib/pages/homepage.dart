@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'doctorlist.dart';
 import '../data.dart';
+import '../main.dart';
 
 class HomePage extends StatefulWidget {
   HomePage(this.userData, {Key key, this.title}) : super(key: key);
@@ -28,6 +29,13 @@ class _HomePageState extends State<HomePage> {
         DoctorTileWidget(
           Doctor.all[0],
           widget.userData,
+        ),
+        Container(
+          padding: EdgeInsets.all(20),
+          child: RaisedButton(
+            child: Text("Test"),
+            onPressed: notifications.notify,
+          ),
         )
       ]),
     );

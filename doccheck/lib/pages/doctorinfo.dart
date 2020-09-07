@@ -50,7 +50,7 @@ class _DoctorInfoState extends State<DoctorInfo> {
           shrinkWrap: true,
           children: <Widget>[
             Container(
-                margin: EdgeInsets.symmetric(vertical: 40),
+                margin: EdgeInsets.symmetric(vertical: 20),
                 child: Text(
                     "Days till next appointment: " +
                         widget.userData
@@ -58,6 +58,16 @@ class _DoctorInfoState extends State<DoctorInfo> {
                             .toString(),
                     style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.bold))),
+            CheckboxListTile(
+              title: Text("Notify when due"),
+              value: true,
+              onChanged: (bool to) {
+                setState(() {
+                  //TODO
+                });
+              },
+            ),
+            Divider(),
             Container(
                 margin: EdgeInsets.symmetric(vertical: 10),
                 child: Text(
@@ -67,6 +77,7 @@ class _DoctorInfoState extends State<DoctorInfo> {
                     fontSize: 15,
                   ),
                 )),
+            Divider(),
             Container(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -80,7 +91,7 @@ class _DoctorInfoState extends State<DoctorInfo> {
                           Scaffold.of(context).showSnackBar(SnackBar(
                             content: Text('Your last appointment was saved'),
                             duration: Duration(seconds: 3),
-                            backgroundColor: Colors.red,
+                            backgroundColor: Colors.red[800],
                           ));
                           widget.userData.nextAppointments[widget.doctor] =
                               _tempDate.add(widget.doctor
@@ -88,7 +99,7 @@ class _DoctorInfoState extends State<DoctorInfo> {
                         });
                       },
                       textColor: Colors.white,
-                      color: Colors.red,
+                      color: Colors.red[700],
                       padding: const EdgeInsets.all(0.0),
                       child: Container(
                         padding: const EdgeInsets.all(10.0),
@@ -99,7 +110,7 @@ class _DoctorInfoState extends State<DoctorInfo> {
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
